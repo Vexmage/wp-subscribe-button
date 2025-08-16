@@ -32,6 +32,7 @@ git init
 git add .
 git commit -m "Initial commit: ColorBliss Subscribe plugin"
 # Create a new empty GitHub repo first, then:
-git remote add origin https://github.com/<you>/colorbliss-subscribe.git
+git remote add origin https://github.com/<you>/wp-subscribe-button.git
 git branch -M main
 git push -u origin main
+
