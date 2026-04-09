@@ -1,38 +1,125 @@
-# ColorBliss Subscribe
+# ColorBliss Subscribe (WordPress Plugin)
 
-A lightweight subscription “star button” for WordPress with a custom REST endpoint, honeypot, fill-time check, and simple rate limiting.
+A lightweight WordPress plugin that adds an interactive “subscribe” star button with a custom REST endpoint, anti-bot protections, and a modern JS/CSS front-end.
 
-## Features
-- `[cb_subscribe]` shortcode renders an animated star button → expands to a form.
-- REST endpoint at `/wp-json/colorbliss/v1/subscribe`.
-- Anti-bot measures: honeypot field, min time-to-fill, IP/email rate limits.
-- Emails are configurable via WordPress filters (no secrets in repo).
+Originally built for a client project, this plugin demonstrates a clean **WordPress + REST + frontend interaction pattern**.
 
-## Install
-1. Upload folder `colorbliss-subscribe` to `wp-content/plugins/`.
-2. Activate **ColorBliss Subscribe** in WP Admin → Plugins.
-3. Add `[cb_subscribe]` shortcode to any page/post.
+---
 
-## Configure (no hard-coded emails)
-Add to your theme’s `functions.php` or a small mu-plugin:
+## ✨ Features
+
+* Shortcode: `[cb_subscribe]`
+* Interactive UI (animated star → expandable form)
+* Custom REST API endpoint (`/wp-json/colorbliss/v1/subscribe`)
+* Spam protection:
+
+  * Honeypot field
+  * Minimum fill-time check
+  * Rate limiting (per IP + email)
+* Email notifications via `wp_mail`
+* Accessible UI (keyboard + ARIA support)
+* Minimal footprint (no external dependencies)
+
+---
+
+## 🧱 Architecture Overview
+
+This plugin follows a simple but powerful pattern:
+
+* **PHP (WordPress layer)**
+
+  * Registers shortcode
+  * Enqueues assets
+  * Defines REST endpoint
+  * Handles validation + email sending
+
+* **JavaScript (client layer)**
+
+  * UI interaction (expand/collapse)
+  * Form submission via `fetch`
+  * Modal feedback
+
+* **CSS (presentation layer)**
+
+  * Animated star button
+  * Responsive layout
+  * Modal styling
+
+This separation keeps WordPress as the “bridge” while allowing modern frontend behavior.
+
+---
+
+## 🚀 Installation
+
+1. Download or clone this repository
+2. Place the folder in:
+
+   ```
+   wp-content/plugins/
+   ```
+3. Activate **ColorBliss Subscribe** in WordPress Admin
+4. Add the shortcode to any page or post:
+
+   ```
+   [cb_subscribe]
+   ```
+
+---
+
+## ⚙️ Configuration
+
+Avoid hardcoding email addresses by using filters:
 
 ```php
-add_filter('cb_subscribe_to_email', function(){ return 'recipient@example.com'; });
-add_filter('cb_subscribe_bcc_email', function(){ return 'me@example.com'; }); // optional
-add_filter('cb_subscribe_from_name', function(){ return 'My Site'; });
+add_filter('cb_subscribe_to_email', function() {
+  return 'you@example.com';
+});
+```
 
-## License
+Optional:
+
+```php
+add_filter('cb_subscribe_bcc_email', fn() => 'backup@example.com');
+add_filter('cb_subscribe_from_name', fn() => 'My Site');
+```
+
+---
+
+## 🔌 REST Endpoint
+
+```
+POST /wp-json/colorbliss/v1/subscribe
+```
+
+Payload:
+
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com"
+}
+```
+
+---
+
+## 🛡️ Anti-Spam Measures
+
+* Hidden honeypot field
+* Minimum interaction time threshold (~1.5s)
+* Rate limiting:
+
+  * 1 request per 30s per email
+  * 10 requests per hour per IP
+
+---
+
+## 🧠 Notes
+
+This plugin intentionally keeps PHP minimal and pushes interaction into the frontend.
+It could be extended to use an external service (e.g., Node, .NET, or serverless backend) while keeping WordPress as the integration layer.
+
+---
+
+## 📄 License
+
 MIT
-
-# 6) How to push to GitHub (quick)
-
-```bash
-cd path/to/colorbliss-subscribe
-git init
-git add .
-git commit -m "Initial commit: ColorBliss Subscribe plugin"
-# Create a new empty GitHub repo first, then:
-git remote add origin https://github.com/<you>/wp-subscribe-button.git
-git branch -M main
-git push -u origin main
-
