@@ -6,7 +6,7 @@ Originally built for a client project, this plugin demonstrates a clean **WordPr
 
 ---
 
-## ✨ Features
+## Features
 
 * Shortcode: `[cb_subscribe]`
 * Interactive UI (animated star → expandable form)
@@ -22,7 +22,7 @@ Originally built for a client project, this plugin demonstrates a clean **WordPr
 
 ---
 
-## 🧱 Architecture Overview
+## Architecture Overview
 
 This plugin follows a simple but powerful pattern:
 
@@ -49,7 +49,7 @@ This separation keeps WordPress as the “bridge” while allowing modern fronte
 
 ---
 
-## 🚀 Installation
+## Installation
 
 1. Download or clone this repository
 2. Place the folder in:
@@ -66,7 +66,7 @@ This separation keeps WordPress as the “bridge” while allowing modern fronte
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 Avoid hardcoding email addresses by using filters:
 
@@ -85,7 +85,7 @@ add_filter('cb_subscribe_from_name', fn() => 'My Site');
 
 ---
 
-## 🔌 REST Endpoint
+## REST Endpoint
 
 ```
 POST /wp-json/colorbliss/v1/subscribe
@@ -102,7 +102,7 @@ Payload:
 
 ---
 
-## 🛡️ Anti-Spam Measures
+## Anti-Spam Measures
 
 * Hidden honeypot field
 * Minimum interaction time threshold (~1.5s)
@@ -113,13 +113,13 @@ Payload:
 
 ---
 
-## 🧠 Notes
+## Notes
 
 This plugin intentionally keeps PHP minimal and pushes interaction into the frontend.
 It could be extended to use an external service (e.g., Node, .NET, or serverless backend) while keeping WordPress as the integration layer.
 
 ---
 
-## 📄 License
+## License
 
 MIT
