@@ -1,4 +1,4 @@
-# ColorBliss Subscribe (WordPress Plugin)
+# Star Shaped Subscribe Button (WordPress Plugin)
 
 A lightweight WordPress plugin that adds an interactive “subscribe” star button with a custom REST endpoint, anti-bot protections, and a modern JS/CSS front-end.
 
